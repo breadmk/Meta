@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //concat,filter,map,slice,스프래드(전개)연산자
+
+        console.log("1. ======================== 스프레드 연산자");
+        const a = [1,2,3];
+        const b = [...a];
+        b.push(4);  //b의 데이터 변경
+        console.log(a)  //[1,2,3]
+        console.log(b)  //[1,2,3,4]
+
+        const c = [...a,4]; //concat 이랑 같음.
+
+
+        console.log("2. ======================== 추가하기");  // add 추가할때 사용
+        const a2 = [1,2,3];
+        const b2 = a2.concat(4);
+        console.log(a2)    //[1,2,3]
+        console.log(b2)    //[1,2,3,4]
+
+        const c2 = [0,...a2,4]; //concat 이랑 같음.
+        console.log(`c2의 값은 : ${c2}`)    //[0,1,2,3,4]
+
+        console.log("3. ======================== 걸러내기");  //삭제하기에 많이 사용.
+        const a3 = [1,2,3];
+        const b3 = a3.filter( (n)=>{ return n!=1} ); // boolean 을 return 받는다. => true 만 걸러낸다.
+        console.log(b3);    // [2,3]
+
+        console.log("4. ======================== 잘라내기"); // 삽입가능
+        const a4 = [1,2,3];
+        const b4 = a4.slice(0,2);
+        console.log(b4); //[1,2]
+        const c4 = [...a4.slice(0,2),4,...a4.slice(2,3)];
+        console.log(c4); //[1,2,4,3]
+
+        console.log("5. ======================== 반복하기"); // 삽입가능
+        const a5 = [1,2,3];
+        // a5.forEach( (n)=>{ console.log(n)} );  // 리턴을 못함..
+
+        /* JSX에서 사용이 불가능함
+         for(let i=0; i<a5.length; i++){
+             console.log(a5[i]);
+         }
+        */
+        const b5 = a5.map( (n)=>{ return n});  //deep copy
+        console.log(b5)
+
+        const data = {phone:"2222"}
+        const a6 = {id:1,name:"홍길동",phone:"1111",gender:"남"};  
+        const b6 = {...a6,...data};  //뒤에 있는걸로 덮어 씌움. 순서 주의.
+        console.log(b6)
+
+        const users = [
+         { id:1,name:"구태모",phone:"1111"}, //자바스크립트 오브젝트
+         { id:2,name:"이대엽",phone:"2222"},
+         { id:3,name:"오승훈",phone:"3333"}
+        ];
+
+        const updateUserDto = {
+            id:2,name:"이름바꾸기: 홍길동"
+        };
+
+        const newUser = users.map( user=>user.id===updateUserDto.id ? {...user,...updateUserDto} : user)
+        console.log(newUser)
+    </script>
+</body>
+</html>

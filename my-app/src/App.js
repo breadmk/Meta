@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import './App.css';
+import Sub from './Sub';
 
 //0. React 엔진 - 데이터변경감지에서 UI그려주는 !!
 //1. 실행방식
@@ -20,16 +22,43 @@ const b = 20; //상수
 function App() {
 	let c; // 값은 있는데 정의되지 않음  (undefined)
 	let d = undefined;
-	console.log(1, c);
 	const mystyle = {
 		color: 'red'
 	};
+
+	let list = [ 1, 2, 3 ];
+
+	/* useState */
+	const [ number, setNumber ] = useState(1); //React안에 hocks 라이브러리 상태값이 됨.
+	const add = () => {
+		setNumber(number + 1); //리액트한테 number 값 변경할게 라고 요청
+		console.log('add', number);
+	};
+	/* */
+
+	/* */
+	const [ users, setUsers ] = useState([]);
+	const download = () => {
+		let sample = [ { id: 1, name: '홍길동' }, { id: 2, name: '임꺽정' }, { id: 3, name: '장보고' }, { id: 4, name: '이순신' } ];
+		setUsers([ ...users, ...sample ]);
+	};
+	/* */
 
 	return (
 		<div>
 			<div style={mystyle}>안녕 {b === 20 ? '20입니다.' : '20이 아닙니다'}</div>
 			<h1 className='box-style'>헤딩태그{a === 10 && '10입니다'}</h1>
 			<hr />
+			<div>
+				{list.map((n) => {
+					return n;
+				})}
+				<br />
+				<h1>숫자 : {number} </h1>
+				<button onClick={add}>더하기</button>
+				<Sub />
+				<button onClick={download} />
+			</div>
 		</div>
 	);
 }
