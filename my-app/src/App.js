@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import Sub from './Sub';
+import Third from './Third';
+import { numThird } from './Third';
 
 //0. React 엔진 - 데이터변경감지에서 UI그려주는 !!
 //1. 실행방식
@@ -20,7 +23,16 @@ let a = 10; //변수
 const b = 20; //상수
 
 function App() {
-  console.log('App 실행됨');
+  const [data, setData] = useState(0);
+
+  //실행시점 :
+  //(1)App() 함수가 최초 실행될 때 (App() 그림이 최초 그려질때)
+  //(2)상태 변수가 변경될 때
+  useEffect(() => {
+    console.log('useEffect 실행됨');
+    setData(5);
+  });
+
   let c; // 값은 있는데 정의되지 않음  (undefined)
   let d = undefined;
   const mystyle = {
@@ -55,6 +67,14 @@ function App() {
 
   return (
     <div>
+      <h1>데이터 : {data} </h1>
+      <button
+        onClick={() => {
+          setData(data + 1);
+        }}
+      >
+        더하기
+      </button>
       <div style={mystyle}>안녕 {b === 20 ? '20입니다.' : '20이 아닙니다'}</div>
       <h1 className="box-style">헤딩태그{a === 10 && '10입니다'}</h1>
       <hr />
@@ -66,6 +86,7 @@ function App() {
         <h1>숫자 : {number} </h1>
         <button onClick={add}>더하기</button>
         <Sub />
+        <Third />
         <button onClick={download}>다운로드</button>
         {users.map((u) => (
           <h1>
@@ -73,6 +94,7 @@ function App() {
           </h1>
         ))}
       </div>
+      {numThird}
     </div>
   );
 }
