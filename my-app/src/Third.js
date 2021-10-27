@@ -1,10 +1,10 @@
 import React from 'react';
 
-let numThird = 10;
+let num = 10;
 
 const Third = () => {
-  return <div></div>;
+	return <div>Thrid</div>;
 };
 
-export { numThird };
+export { num };
 export default Third;
