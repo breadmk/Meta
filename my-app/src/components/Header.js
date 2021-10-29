@@ -5,20 +5,20 @@ import styled from 'styled-components';
 
 // styled-components = > js 파일과 css 파일이 한곳에 있어서 관리하기 너무 편해짐.
 
-const HeaderList = styled.div`
+const StyledHeaderDiv = styled.div`
 	border: 1px solid black;
 	height: 300px;
 `;
 
 const Header = () => {
 	return (
-		<HeaderList>
+		<StyledHeaderDiv>
 			<ul>
 				<li>메뉴 1</li>
 				<li>메뉴 2</li>
 				<li>메뉴 3</li>
 			</ul>
-		</HeaderList>
+		</StyledHeaderDiv>
 	);
 };
 
