@@ -9,6 +9,7 @@ const HomePage = () => {
 
 	const [ boards, setBoards ] = useState([]);
 	const [ number, setNumber ] = useState(0);
+	const [ user, setUser ] = useState({});
 	// 빈 배열 한번만 실행
 	useEffect(() => {
 		// 다운로드 가정 = fetch(),axios(),ajax()
@@ -22,12 +23,13 @@ const HomePage = () => {
 		// ※주의
 		// 꼭 상태데이터로 넣어줘야함. 단순하게 let test = ; 로 선언하면 재랜더링이 안 되기 때문에 들어가지 않음.
 		setBoards([ ...data ]);
+		setUser({ id: 1, username: 'ssar' });
 	}, []);
 
 	return (
 		<div>
 			<Header />
-			<Home boards={boards} id={1} setBoards={setBoards} number={number} setNumber={setNumber} />
+			<Home boards={boards} id={1} setBoards={setBoards} number={number} setNumber={setNumber} user={user} />
 			<Footer />
 		</div>
 	);
