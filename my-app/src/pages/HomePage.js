@@ -1,7 +1,5 @@
 import React from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
-import Footer from '../components/Foorter';
-import Header from '../components/Header';
 import Home from '../components/home/Home';
 
 const HomePage = () => {
@@ -28,9 +26,7 @@ const HomePage = () => {
 
 	return (
 		<div>
-			<Header />
 			<Home boards={boards} id={1} setBoards={setBoards} number={number} setNumber={setNumber} user={user} />
-			<Footer />
 		</div>
 	);
 };

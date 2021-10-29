@@ -1,5 +1,8 @@
-import HomePage from './pages/HomePage';
+import { Route } from 'react-router-dom';
+import Footer from './components/Foorter';
+import Header from './components/Header';
 import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 
 /* 
 	styled-components
@@ -11,7 +14,10 @@ import LoginPage from './pages/LoginPage';
 function App() {
 	return (
 		<div>
-			<HomePage />
+			<Header />
+			<Route path='/' exact={true} component={HomePage} />
+			<Route path='/login/:id' exact={true} component={LoginPage} />
+			<Footer />
 		</div>
 	);
 }
