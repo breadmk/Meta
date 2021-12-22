@@ -1,0 +1,26 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/book-frontend/node_modules
+book-frontend/.pnp
+book-frontend/.pnp.js
+
+# testing
+book-frontend/coverage
+
+# production
+book-frontend/build
+
+# misc
+book-frontend/.DS_Store
+book-frontend/.env.local
+book-frontend/.env.development.local
+book-frontend/.env.test.local
+book-frontend/.env.production.local
+
+book-frontend/npm-debug.log*
+book-frontend/yarn-debug.log*
+book-frontend/yarn-error.log*
+
+# 폴더무시
+.metadata/
