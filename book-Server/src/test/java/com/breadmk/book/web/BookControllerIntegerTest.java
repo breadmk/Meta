@@ -53,7 +53,7 @@ public class BookControllerIntegerTest {
     private BookRepository bookRepository;
     
     @Autowired
-    private EntityManager entityManager;
+    private EntityManager entityManager;  //jpa 구현체
     
     @BeforeEach
     public void init() {
@@ -85,14 +85,6 @@ public class BookControllerIntegerTest {
 	@Test
 	public void findAll_test() throws Exception{
 		
-		//given || 더미데이터 생성 //통합테스트에서는 아래가 필요없음..실제 디비로 할꺼니까
-		List<Book> books = new ArrayList<Book>();
-		books.add(new Book(1L,"스프링부트 따라하기","cos"));
-		books.add(new Book(2L,"리액트 따라하기","cos"));
-		books.add(new Book(3L,"junit 따라하기","cos"));
-		bookRepository.saveAll(books);
-		
-		
 		//when
 		ResultActions resulitAction = mockMvc.perform(get("/book")
 				.accept(MediaType.APPLICATION_JSON_UTF8));
@@ -101,7 +93,7 @@ public class BookControllerIntegerTest {
 		resulitAction
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$",Matchers.hasSize(3)))
-			.andExpect(jsonPath("$.[2].title").value("junit 따라하기"))
+			.andExpect(jsonPath("$.[2].title").value("세번째 게시글"))
 			.andDo(MockMvcResultHandlers.print());
 	}
 	
@@ -109,13 +101,7 @@ public class BookControllerIntegerTest {
 	@Test
 	public void findById_test() throws Exception{
 		//given
-		Long id =3L;
-
-		List<Book> books = new ArrayList<Book>();
-		books.add(new Book(1L,"스프링부트 따라하기","cos"));
-		books.add(new Book(2L,"리액트 따라하기","cos"));
-		books.add(new Book(3L,"junit 따라하기","cos"));
-		bookRepository.saveAll(books);
+		Long id =1L;
 		
 		//when
 		ResultActions resultAction = mockMvc.perform(get("/book/{id}",id)
@@ -124,7 +110,7 @@ public class BookControllerIntegerTest {
 		//then
 		resultAction
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.title").value("junit 따라하기"))
+			.andExpect(jsonPath("$.title").value("첫 게시글"))
 			.andDo(MockMvcResultHandlers.print());
 	}
 	
@@ -133,12 +119,6 @@ public class BookControllerIntegerTest {
 	public void update_test() throws Exception{
 		//given
 		Long id =3L;
-		
-		List<Book> books = new ArrayList<Book>();
-		books.add(new Book(1L,"스프링부트 따라하기","cos"));
-		books.add(new Book(2L,"리액트 따라하기","cos"));
-		books.add(new Book(3L,"junit 따라하기","cos"));
-		bookRepository.saveAll(books);
 		
 		Book book = new Book(null,"C++ 따라하기","cos");
 		String content = new ObjectMapper().writeValueAsString(book); //Object를 Json으로 바꾸는 함수.
@@ -161,12 +141,6 @@ public class BookControllerIntegerTest {
 	public void delete_test() throws Exception{
 		//given
 		Long id =1L;
-		
-		List<Book> books = new ArrayList<Book>();
-		books.add(new Book(1L,"스프링부트 따라하기","cos"));
-		books.add(new Book(2L,"리액트 따라하기","cos"));
-		books.add(new Book(3L,"junit 따라하기","cos"));
-		bookRepository.saveAll(books);
 		
 		//when
 		ResultActions resultAction =  mockMvc.perform(delete("/book/{id}",id)

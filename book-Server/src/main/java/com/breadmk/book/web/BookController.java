@@ -22,6 +22,10 @@ public class BookController {
 	
 	private final BookService bookService;
 	
+	//  Spring security (라이브러리 적용) - CORS 정책을 가지고 있음.  여기시 팅기면 저 아래 @CrossOrigin 의미가 업음. (시큐리티가 CORS를 해제)
+	// @CrossOrigin  사용시 Controller 진입 직전에 작동됨.
+	
+	@CrossOrigin
 	@PostMapping("/book")
 	public ResponseEntity<?> save(@RequestBody Book book){
 		return new ResponseEntity<>(bookService.save(book),HttpStatus.CREATED); //201
@@ -33,16 +37,19 @@ public class BookController {
 		return new ResponseEntity<>(bookService.findAll(),HttpStatus.OK); //200
 	}
 	
+	@CrossOrigin
 	@GetMapping("/book/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id){ //warpping 클래스 사용
 		return new ResponseEntity<>(bookService.findOne(id),HttpStatus.OK); //200
 	}
 	
+	@CrossOrigin
 	@PutMapping("/book/{id}")
 	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Book book){ //warpping 클래스 사용
 		return new ResponseEntity<>(bookService.update(id, book),HttpStatus.OK); //200
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/book/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id){ //warpping 클래스 사용
 		return new ResponseEntity<>(bookService.delete(id),HttpStatus.OK); //200
