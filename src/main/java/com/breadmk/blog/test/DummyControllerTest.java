@@ -31,6 +31,9 @@ public class DummyControllerTest {
 	// save 함수는 id를 전달하면 해당 id에 대한 데이트가 없으면 insert를 해요
 	//email, password
 	
+	
+	
+	
 	@Transactional    // 함수 종료시에 자동 commit 이 됨.
  	@PutMapping("/dummy/user/{id}")
 	public User updateUser(@PathVariable int id, @RequestBody User requestUser) { //json 데이터를 요청 => Java Object 로 변환해서 받아줌. (Message Converter)
@@ -46,8 +49,8 @@ public class DummyControllerTest {
 		 user.setEmail(requestUser.getEmail());
 		 
 //		 userRepository.save(user);
-		 // 더치 체킹;
-		 return null;
+//		  더치 체킹
+		 return user;
 	}
 	
 	@GetMapping("/dummy/users")
